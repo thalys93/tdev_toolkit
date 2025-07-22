@@ -15,22 +15,22 @@ In modern development, reusability and scalability are king. `@tdev/toolkit` is 
 
 Each module is standalone, configurable, and integration-ready:
 
-- 🔒 **Auth Module**  
+- 🔒 **Auth Module**  ❌
   Seamless user authentication with strategies like JWT, OAuth, and more.
 
-- 💳 **Payment Module**  
+- 💳 **Payment Module** 🧱 (wip)
   Abstracts payment gateway logic (e.g. Mercado Pago, Stripe) with support for subscriptions and transactions.
 
-- 📧 **Email Module**  
+- 📧 **Email Module** ❌
   Plug-and-play transactional emails with provider flexibility (SMTP, SendGrid, etc).
 
-- 🔔 **Notifications Module**  
+- 🔔 **Notifications Module**  ❌
   Real-time and scheduled notifications via multiple channels (email, push, in-app).
 
-- 📁 **Files Module**  
+- 📁 **Files Module**  ❌
   File uploads, storage, and media handling with services like Cloudinary and S3.
 
-- 👤 **Users Module**  
+- 👤 **Users Module**  ❌
   Core user management, profiles, roles, and permissions.
 
 > ✨ New modules will be added progressively — ideas like Logging, Analytics, and External Integrations are already brewing.
@@ -40,14 +40,6 @@ Each module is standalone, configurable, and integration-ready:
 ## 🔧 Core System Check
 
 The `core` module includes health checks for connected services. When initializing your app, it verifies that third-party services (like Cloudinary, SMTP, etc.) are properly configured and responsive.
-
-Example:
-
-```bash
-npm run system-check
-
-Output: will list available services and highlight any misconfigurations or connectivity issues.
-````
 
 📦 Getting Started
 
@@ -66,6 +58,11 @@ npm install
 4. Run in dev mode:
 ```bash
 npm run start:dev
+```
+
+5. Access the Swagger:
+```bash
+http://localhost:3000/api/v1
 ```
 
 🤝 Contributing
