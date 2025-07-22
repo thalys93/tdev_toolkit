@@ -1,6 +1,6 @@
 # 🚀 @tdev/toolkit
 
-**A modular Full Stack development toolkit built and maintained by [Thalys Dev](https://github.com/thalysdev)**  
+**A modular Full Stack development toolkit built and maintained by [Thalys Dev](https://github.com/thalys93)**  
 Designed to boost productivity, enforce architecture consistency, and accelerate development across multiple projects.
 
 ---
@@ -53,7 +53,7 @@ Output: will list available services and highlight any misconfigurations or conn
 
 1. Clone the repo:
 ```bash
-git clone https://github.com/thalysdev/@tdev_toolkit.git
+git clone https://github.com/thalys93/tdev_toolkit.git
 ```
 
 2. Install dependencies:
