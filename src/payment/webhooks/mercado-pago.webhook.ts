@@ -1,7 +1,20 @@
-import { Controller, HttpCode, Logger, Post, Req } from '@nestjs/common';
+import {
+  Controller,
+  HttpCode,
+  Logger,
+  Post,
+  Req,
+  HttpException,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { PaymentService } from '../payment.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiResponse as StandardApiResponse,
+  ApiResponseBuilder,
+  API_KEYS,
+  API_STATUS,
+} from '../../utils/api-response.interface';
 
 @ApiTags('Webhooks Module - Mercado Pago')
 @Controller('webhook/mercadopago')
@@ -13,24 +26,65 @@ export class MercadoPagoWebhookController {
 
   @Post()
   @HttpCode(200)
-  async handle(@Req() req: Request & { rawBody: string }) {
+  @ApiOperation({ summary: 'Handle MercadoPago webhook events' })
+  @ApiResponse({ status: 200, description: 'Webhook processed successfully' })
+  @ApiResponse({ status: 400, description: 'Invalid webhook data' })
+  async handle(
+    @Req() req: Request & { rawBody: string },
+  ): Promise<
+    StandardApiResponse<{ received: boolean; topic?: string; id?: string }>
+  > {
     const topic = req.body.topic || req.body.type;
     const id = req.body.data?.id || req.body.id;
 
     if (!id || id === '123456') {
-      // aqui você pode colocar mais regras se quiser
       this.logger.warn(`Ignoring invalid or test payment id: ${id}`);
-      return;
+      return ApiResponseBuilder.success(
+        { received: true, topic, id },
+        API_STATUS.WEBHOOK_IGNORED,
+        200,
+        API_KEYS.PAYMENT.WEBHOOK_MERCADOPAGO,
+        'Webhook ignorado: ID inválido ou de teste',
+      );
     }
 
-    this.logger.log(`Received MP webhook: topic=${topic} id=${id}`);
+    this.logger.log(`✅ MercadoPago webhook received: topic=${topic} id=${id}`);
 
-    await this.paymentService.processMercadoPagoNotification({
-      topic,
-      id,
-      raw: req.body,
-    });
+    try {
+      await this.paymentService.processMercadoPagoNotification({
+        topic,
+        id,
+        raw: req.body,
+      });
 
-    return;
+      return ApiResponseBuilder.success(
+        { received: true, topic, id },
+        API_STATUS.WEBHOOK_PROCESSED,
+        200,
+        API_KEYS.PAYMENT.WEBHOOK_MERCADOPAGO,
+        `Webhook do MercadoPago processado com sucesso: ${topic}`,
+      );
+    } catch (error) {
+      this.logger.error(
+        `Error processing MercadoPago webhook: ${error.message}`,
+        error.stack,
+      );
+
+      throw new HttpException(
+        ApiResponseBuilder.error(
+          'Erro ao processar webhook do MercadoPago',
+          API_STATUS.ERROR,
+          500,
+          API_KEYS.PAYMENT.WEBHOOK_MERCADOPAGO,
+          error.message,
+          {
+            topic,
+            id,
+            originalError: error,
+          },
+        ),
+        500,
+      );
+    }
   }
 }

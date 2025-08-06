@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PaymentStrategy } from '../interfaces/payment-strategy.interface';
 import { CreatePaymentDto } from '../dto/create-payment.dto';
-import { PaymentResponseDto } from '../dto/payment-response.dto';
+import { PaymentResponseDto, PaymentStatus } from '../dto/payment-response.dto';
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 import { centsToUnits } from 'src/utils/currency.converter';
 
@@ -39,7 +39,7 @@ export class MercadoPagoStrategy implements PaymentStrategy {
     return {
       provider: 'mercado_pago',
       paymentId: result.id,
-      status: 'created',
+      status: PaymentStatus.PENDING, // todo: add CREATED,
       amount: data.amount,
       currency: data.currency,
       redirectUrl: result.init_point,

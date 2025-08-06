@@ -13,3 +13,17 @@ export function centsToUnits(cents: number): number {
 export function unitsToCents(units: number): number {
   return Math.round(units * 100);
 }
+
+export function getCurrencyValue(currency: string, value: number) {
+  if (currency === 'BRL') {
+    return unitsToCents(value);
+  }
+  return centsToUnits(value);
+}
+
+export function getCurrencySymbol(currency: string) {
+  if (currency === 'BRL') {
+    return 'R$';
+  }
+  return '$';
+}

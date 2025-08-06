@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { CoreModule } from './core.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { GlobalExceptionFilter } from './utils/global-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(CoreModule);
@@ -26,6 +27,9 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
+
+  // Aplicar o filtro global de exceções
+  app.useGlobalFilters(new GlobalExceptionFilter());
 
   await app.listen(3000);
 }
