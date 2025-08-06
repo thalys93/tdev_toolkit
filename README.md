@@ -21,7 +21,7 @@ Each module is standalone, configurable, and integration-ready:
 - 💳 **Payment Module** 🧱 (wip)
   Abstracts payment gateway logic (e.g. Mercado Pago, Stripe) with support for subscriptions and transactions.
 
-- 📧 **Email Module** ❌
+- 📧 **Email Module** ✅
   Plug-and-play transactional emails with provider flexibility (SMTP, SendGrid, etc).
 
 - 🔔 **Notifications Module**  ❌
@@ -44,11 +44,13 @@ The `core` module includes health checks for connected services. When initializi
 📦 Getting Started
 
 1. Clone the repo:
+
 ```bash
 git clone https://github.com/thalys93/tdev_toolkit.git
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
@@ -56,26 +58,30 @@ npm install
 3. Add your .env file based on .env.example
 
 4. Run in dev mode:
+
 ```bash
 npm run start:dev
 ```
 
 5. Access the Swagger:
+
 ```bash
 http://localhost:3000/api/v1
 ```
 
 🤝 Contributing
 ----
+
 This toolkit is created for personal usage, but contributions, suggestions or feedback are welcome! If you find a bug or want to propose a module, feel free to open an issue or submit a PR
 
 🧬 License
 ----
+
 MIT — feel free to fork, modify and use it in your own adventures.
 
 💬 Author
 ----
-Crafted with ❤️ by Thalys Dev
 
+Crafted with ❤️ by Thalys Dev
 
 Let’s build **smarter**, not harder.
