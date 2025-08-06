@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333333; background-color: #f0fdf4;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f0fdf4;">
+        <tr>
+            <td style="padding: 40px 20px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden;">
+
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 40px 30px; text-align: center;">
+                            <div style="width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.2); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 24px; color: #ffffff;">📢</span>
+                            </div>
+                            <h1 style="margin: 0 0 10px 0; font-size: 28px; font-weight: 700; color: #ffffff; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                                {{title}}
+                            </h1>
+                            <p style="margin: 0; font-size: 16px; color: #a7f3d0;">
+                                Nova notificação
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px 30px;">
+
+                            <!-- Welcome Message -->
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <h2 style="margin: 0 0 20px 0; font-size: 24px; font-weight: 600; color: #1f2937;">
+                                    Olá {{name}},
+                                </h2>
+                                <div style="font-size: 16px; color: #6b7280; line-height: 1.7;">
+                                    <p style="margin: 0;">{{message}}</p>
+                                </div>
+                            </div>
+
+                            {{#if details}}
+                            <!-- Details Section -->
+                            <div style="background-color: #eff6ff; border: 2px solid #3b82f6; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
+                                <div style="display: flex; align-items: flex-start;">
+                                    <div style="width: 40px; height: 40px; background-color: #3b82f6; border-radius: 50%; margin-right: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <span style="font-size: 16px; color: #ffffff;">ℹ️</span>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h3 style="margin: 0 0 15px 0; font-size: 16px; font-weight: 600; color: #1e40af;">
+                                            Detalhes
+                                        </h3>
+                                        <div style="space-y: 10px;">
+                                            {{#each details}}
+                                            <div style="margin-bottom: 10px;">
+                                                <div style="display: flex; flex-direction: column;">
+                                                    <span style="font-weight: 600; color: #1e40af; font-size: 14px; margin-bottom: 2px;">{{@key}}:</span>
+                                                    <span style="color: #3730a3; font-size: 14px;">{{this}}</span>
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+
+                            {{#if actionUrl}}
+                            <!-- Action Button Section -->
+                            <div style="background-color: #f8fafc; border: 2px solid #e5e7eb; border-radius: 8px; padding: 30px; text-align: center; margin-bottom: 30px;">
+                                <div style="width: 48px; height: 48px; background-color: #d1fae5; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                                    <span style="font-size: 20px; color: #10b981;">⚡</span>
+                                </div>
+                                <p style="margin: 0 0 25px 0; font-size: 16px; color: #374151; line-height: 1.6;">
+                                    {{#if actionText}}
+                                        Clique no botão abaixo para continuar:
+                                    {{else}}
+                                        Acesse o link para mais informações:
+                                    {{/if}}
+                                </p>
+                                <a href="{{actionUrl}}" style="display: inline-block; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);">
+                                    🔗 {{#if actionText}}{{actionText}}{{else}}Acessar{{/if}}
+                                </a>
+                            </div>
+                            {{/if}}
+
+                            <!-- Help Section -->
+                            <div style="background-color: #f9fafb; border-left: 4px solid #10b981; border-radius: 6px; padding: 20px; margin-bottom: 30px;">
+                                <div style="display: flex; align-items: flex-start;">
+                                    <div style="width: 40px; height: 40px; background-color: #d1fae5; border-radius: 50%; margin-right: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <span style="font-size: 16px; color: #10b981;">❓</span>
+                                    </div>
+                                    <div>
+                                        <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #1f2937;">
+                                            Precisa de ajuda?
+                                        </h3>
+                                        <p style="margin: 0; font-size: 14px; color: #6b7280; line-height: 1.6;">
+                                            Se você tiver alguma dúvida sobre esta notificação ou precisar de suporte,
+                                            não hesite em entrar em contato conosco.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Signature -->
+                            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                                <p style="margin: 0; font-size: 16px; color: #6b7280;">
+                                    Atenciosamente,<br>
+                                    <strong style="color: #1f2937;">Equipe {{companyName}}</strong>
+                                </p>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f9fafb; padding: 25px 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                            <p style="margin: 0 0 15px 0; font-size: 12px; color: #9ca3af;">
+                                &copy; {{year}} {{companyName}}. Todos os direitos reservados.
+                            </p>
+                            <div style="display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 11px; color: #9ca3af; display: flex; align-items: center;">
+                                    🔒 Seguro e Confiável
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
